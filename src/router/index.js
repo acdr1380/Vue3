@@ -4,16 +4,16 @@ const routes = [
     {
         name: 'homepage',
         path: '/homepage',
-        compoent: () => import('@/views/HomePage'),
+        component: () => import('@/views/HomePage/index.vue'),
     },
     {
         name: 'login',
         path: '/login',
-        compoent: () => import('@/views/Login'),
+        component: () => import('@/views/HomePage/index.vue'),
     },
     {
-        path: '*',
-        redirect: 'redirect',
+        path: '',
+        redirect: 'homepage',
     },
 ];
 
