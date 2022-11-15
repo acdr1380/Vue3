@@ -1,10 +1,9 @@
-<script setup></script>
+<script setup>
+import { useHomePageStore } from './store.js';
+const store = useHomePageStore();
+</script>
 
 <template>
-    <el-button>Default</el-button>
-    <el-button type="primary">Primary</el-button>
-    <el-button type="success">Success</el-button>
-    <el-button type="info">Info</el-button>
-    <el-button type="warning">Warning</el-button>
-    <el-button type="danger">Danger</el-button>
+    <div>当前count: {{ store.count }}</div>
+    <el-button type="primary" @click="store.increment">添加</el-button>
 </template>

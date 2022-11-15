@@ -1,5 +1,5 @@
 <script setup></script>
 
 <template>
-    <router-view></router-view>
+    <h2>404</h2>
 </template>

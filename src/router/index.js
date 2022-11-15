@@ -13,7 +13,11 @@ const routes = [
     },
     {
         path: '',
-        redirect: 'homepage',
+        redirect: 'login',
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        component: () => import('@/views/ErrorPage/index.vue'),
     },
 ];
 
