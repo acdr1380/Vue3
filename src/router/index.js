@@ -2,19 +2,27 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
     {
-        name: 'homepage',
-        path: '/homepage',
-        component: () => import('@/views/HomePage/index.vue'),
+        path: '/layout',
+        component: () => import('@/layout/index.vue'),
+        children: [
+            {
+                path: 'homepage',
+                name: 'homepage',
+                component: () => import('@/views/HomePage/index.vue'),
+            },
+        ],
     },
     {
         name: 'login',
         path: '/login',
         component: () => import('@/views/Login/index.vue'),
     },
+    // 重定向
     {
         path: '',
         redirect: 'login',
     },
+    // 配置错误路由跳转
     {
         path: '/:pathMatch(.*)*',
         component: () => import('@/views/ErrorPage/index.vue'),
