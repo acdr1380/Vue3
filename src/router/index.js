@@ -2,13 +2,18 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
     {
-        path: '/layout',
+        path: '',
+        redirect: 'homepage',
         component: () => import('@/layout/index.vue'),
         children: [
             {
                 path: 'homepage',
                 name: 'homepage',
                 component: () => import('@/views/HomePage/index.vue'),
+            },
+            {
+                path: '/:pathMatch(.*)*',
+                component: () => import('@/views/ErrorPage/index.vue'),
             },
         ],
     },
