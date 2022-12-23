@@ -1,9 +1,15 @@
+<template>
+    <div>当前count: {{ `${num}--${nums}` }}</div>
+    <el-button type="primary" @click="add">添加</el-button>
+</template>
+
 <script setup>
 import { useHomePageStore } from './store.js';
+import { ref, computed } from 'vue';
 const store = useHomePageStore();
-</script>
+const num = ref(0);
 
-<template>
-    <div>当前count: {{ store.count }}</div>
-    <el-button type="primary" @click="store.increment">添加</el-button>
-</template>
+const nums = computed(() => num.value * 2);
+
+const add = () => num.value++;
+</script>

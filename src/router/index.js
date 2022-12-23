@@ -1,13 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
+    // 重定向
+    {
+        path: '',
+        redirect: 'login',
+    },
     {
         path: '',
         redirect: 'homepage',
         component: () => import('@/layout/index.vue'),
         children: [
             {
-                path: 'homepage',
+                path: '/homepage',
                 name: 'homepage',
                 component: () => import('@/views/HomePage/index.vue'),
             },
@@ -22,11 +27,7 @@ const routes = [
         path: '/login',
         component: () => import('@/views/Login/index.vue'),
     },
-    // 重定向
-    {
-        path: '',
-        redirect: 'login',
-    },
+
     // 配置错误路由跳转
     {
         path: '/:pathMatch(.*)*',

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-export const useHomePageStore = defineStore('counter', {
+export const useGlobalStore = defineStore('counter', {
     state: () => {
         return { count: 0 };
     },
@@ -9,8 +9,7 @@ export const useHomePageStore = defineStore('counter', {
         doubleCount: ({ count }) => count * 2,
     },
     actions: {
-        increment(a, b, c, d) {
-            console.log('a', a, b, c, d);
+        increment() {
             this.count++;
         },
     },

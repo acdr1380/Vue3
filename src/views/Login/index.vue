@@ -23,7 +23,7 @@ const rules = reactive({
 const onSubmit = async formIntance => {
     await formIntance.validate((valid, fields) => {
         if (valid) {
-            router.push('layout/homepage');
+            router.push('/homepage');
         }
     });
 };
