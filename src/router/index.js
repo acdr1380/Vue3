@@ -14,24 +14,36 @@ const routes = [
             {
                 path: '/homepage',
                 name: 'homepage',
-                component: () => import('@/views/HomePage/index.vue'),
+                component: () => import('@/views/home-page/index.vue'),
+            },
+
+            {
+                path: '/system/user',
+                name: 'user',
+                component: () => import('@/views/system/userManagement/index.vue'),
             },
             {
+                path: '/system/menu',
+                name: 'menu',
+                component: () => import('@/views/system/menuManagement/index.vue'),
+            },
+
+            {
                 path: '/:pathMatch(.*)*',
-                component: () => import('@/views/ErrorPage/index.vue'),
+                component: () => import('@/views/error-page/index.vue'),
             },
         ],
     },
     {
         name: 'login',
         path: '/login',
-        component: () => import('@/views/Login/index.vue'),
+        component: () => import('@/views/login/index.vue'),
     },
 
     // 配置错误路由跳转
     {
         path: '/:pathMatch(.*)*',
-        component: () => import('@/views/ErrorPage/index.vue'),
+        component: () => import('@/views/error-page/index.vue'),
     },
 ];
 
