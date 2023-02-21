@@ -1,39 +1,8 @@
-<script setup>
-import { ref, reactive } from 'vue';
-import { useRouter } from 'vue-router';
-const router = useRouter();
-
-const form = reactive({
-    UserAccount: '',
-    PassWord: '',
-});
-
-const formIntance = ref();
-
-const rules = reactive({
-    UserAccount: [{ required: true, message: '请输入账号', trigger: 'blur' }],
-    PassWord: [
-        { required: true, message: '请输入密码', trigger: 'blur' },
-        { min: 6, message: '长度不能小于6位', trigger: 'change' },
-        { max: 10, message: '长度不能大于10位', trigger: 'change' },
-    ],
-});
-
-// 提交
-const onSubmit = async formIntance => {
-    await formIntance.validate((valid, fields) => {
-        if (valid) {
-            router.push('/homepage');
-        }
-    });
-};
-</script>
-
 <template>
     <div class="login-wrap">
         <div class="login-from">
             <div class="title">Vue3学习</div>
-            <el-form :model="form" ref="formIntance" :rules="rules" size="default">
+            <el-form :model="form" :ref="el => (formIntance = el)" :rules="rules" size="default">
                 <el-form-item prop="UserAccount">
                     <el-input v-model="form.UserAccount" placeholder="请输入账号">
                         <template #prefix>
@@ -55,7 +24,7 @@ const onSubmit = async formIntance => {
                 </el-form-item>
 
                 <el-form-item style="margin-top: 10px">
-                    <el-button type="primary" style="width: 100%" @click="onSubmit(formIntance)">
+                    <el-button type="primary" style="width: 100%" @click="onSubmit">
                         登录
                     </el-button>
                 </el-form-item>
@@ -63,6 +32,39 @@ const onSubmit = async formIntance => {
         </div>
     </div>
 </template>
+
+<script setup>
+import { ref, reactive } from 'vue';
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
+const form = reactive({
+    UserAccount: 'admin',
+    PassWord: '123456',
+});
+
+const formIntance = ref();
+
+const rules = reactive({
+    UserAccount: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+    PassWord: [
+        { required: true, message: '请输入密码', trigger: 'blur' },
+        { min: 6, message: '长度不能小于6位', trigger: 'change' },
+        { max: 10, message: '长度不能大于10位', trigger: 'change' },
+    ],
+});
+
+/**
+ * 提交
+ */
+const onSubmit = async () => {
+    await formIntance.value.validate((valid, fields) => {
+        if (valid) {
+            router.push('/homepage');
+        }
+    });
+};
+</script>
 
 <style lang="scss" scoped>
 .login-wrap {
