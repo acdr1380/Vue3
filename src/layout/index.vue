@@ -35,6 +35,9 @@ import Menu from './menu/index.vue';
     }
     .el-aside {
         border-right: solid 1px var(--el-menu-border-color);
+        width: 15%;
+        max-width: 250px;
+        min-width: 200px;
     }
     .el-main {
         --el-main-padding: 10px;

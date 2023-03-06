@@ -1,33 +1,35 @@
 <template>
-    <input type="text" :value="title" @input="input" />
+    <el-input type="text" v-model="value" @input="input" />
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, reactive } from 'vue';
 const props = defineProps({
     modeValue: {
         type: String,
-    },
-
-    title: {
-        type: String,
+        default: '',
     },
 });
-const emit = defineEmits(['update:modeValue', 'update:title']);
 
-const value = ref('');
+// const { modeValue, title } = reactive(props);
+const emit = defineEmits(['update:modeValue', 'input']);
 
-watch(value, newValue => {
+const value = ref(props.title);
+
+watch(value, (newValue, preValue) => {
     emit('update:modeValue', newValue);
-    emit('update:title', newValue);
 });
 
-watch(props.modeValue, newValue => {
-    value.value = newValue;
-});
+// 使用函数返回值监听props消除警告
+watch(
+    () => props.modeValue,
+    (newValue, preValue) => {
+        value.value = newValue;
+    }
+);
 
-const input = event => {
-    emit('update:title', event.target.value);
+const input = value => {
+    emit('input', value);
 };
 </script>
 
