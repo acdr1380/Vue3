@@ -20,12 +20,12 @@ const routes = [
             {
                 path: '/system/user',
                 name: 'user',
-                component: () => import('@/views/system/userManagement/index.vue'),
+                component: () => import('@/views/modules/system/userManagement/index.vue'),
             },
             {
                 path: '/system/menu',
                 name: 'menu',
-                component: () => import('@/views/system/menuManagement/index.vue'),
+                component: () => import('@/views/modules/system/menuManagement/index.vue'),
             },
 
             {

@@ -1,5 +1,8 @@
 <template>
-    <div>用户管理</div>
+    <div class="layout">
+        <div class="header">1</div>
+        <div class="container">2</div>
+    </div>
 </template>
 
 <script setup>

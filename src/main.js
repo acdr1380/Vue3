@@ -4,6 +4,7 @@ import router from './router';
 import { createPinia } from 'pinia';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 import { piniaPlugin } from '@/plugins/piniaPlugin.js';
+import '@/assets/globalStyle.scss';
 
 const app = createApp(App);
 

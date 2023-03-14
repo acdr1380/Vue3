@@ -8,15 +8,13 @@
                 <Menu></Menu>
             </el-aside>
             <el-main>
-                <el-scrollbar>
-                    <!-- 路由缓存 -->
-                    <!-- <router-view #default="{ Component, route }">
-                        <KeepAlive>
-                            <component :is="Component"></component>
-                        </KeepAlive>
-                    </router-view> -->
-                    <router-view> </router-view>
-                </el-scrollbar>
+                <!-- 路由缓存 -->
+                <router-view #default="{ Component, route }">
+                    <KeepAlive>
+                        <component :is="Component"></component>
+                    </KeepAlive>
+                </router-view>
+                <!-- <router-view> </router-view> -->
             </el-main>
         </el-container>
     </el-container>
@@ -33,14 +31,16 @@ import Menu from './menu/index.vue';
     .el-header {
         border-bottom: solid 1px var(--el-menu-border-color);
     }
+
     .el-aside {
         border-right: solid 1px var(--el-menu-border-color);
         width: 15%;
         max-width: 250px;
         min-width: 200px;
     }
+
     .el-main {
-        --el-main-padding: 10px;
+        --el-main-padding: 0px;
     }
 }
 </style>

@@ -2,7 +2,7 @@
     <div class="login-wrap">
         <div class="login-from">
             <div class="title">Vue3学习</div>
-            <el-form :model="form" :ref="el => (formIntance = el)" :rules="rules" size="default">
+            <el-form ref="formIntance" :model="form" :rules="rules" size="default" @submit.prevent>
                 <el-form-item prop="UserAccount">
                     <el-input v-model="form.UserAccount" placeholder="请输入账号">
                         <template #prefix>
@@ -34,8 +34,8 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
+import service from './service';
 const router = useRouter();
 
 const form = reactive({
@@ -59,9 +59,13 @@ const rules = reactive({
  */
 const onSubmit = async () => {
     await formIntance.value.validate((valid, fields) => {
-        if (valid) {
-            router.push('/homepage');
-        }
+        service
+            .login(form)
+            .then(res => console.log('res'))
+            .catch(err => console.log('err', err));
+        // if (valid) {
+        //     router.push('/homepage');
+        // }
     });
 };
 </script>
