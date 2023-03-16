@@ -3,18 +3,18 @@
         <div class="login-from">
             <div class="title">Vue3学习</div>
             <el-form ref="formIntance" :model="form" :rules="rules" size="default" @submit.prevent>
-                <el-form-item prop="UserAccount">
-                    <el-input v-model="form.UserAccount" placeholder="请输入账号">
+                <el-form-item prop="userAccount">
+                    <el-input v-model="form.userAccount" placeholder="请输入账号">
                         <template #prefix>
                             <el-icon><UserFilled /></el-icon>
                         </template>
                     </el-input>
                 </el-form-item>
-                <el-form-item prop="PassWord">
+                <el-form-item prop="passWord">
                     <el-input
                         type="password"
                         show-password
-                        v-model="form.PassWord"
+                        v-model="form.passWord"
                         placeholder="请输入密码"
                     >
                         <template #prefix>
@@ -24,7 +24,12 @@
                 </el-form-item>
 
                 <el-form-item style="margin-top: 10px">
-                    <el-button type="primary" style="width: 100%" @click="onSubmit">
+                    <el-button
+                        type="primary"
+                        :loading="btnLoading"
+                        style="width: 100%"
+                        @click="onSubmit"
+                    >
                         登录
                     </el-button>
                 </el-form-item>
@@ -34,20 +39,22 @@
 </template>
 
 <script setup>
+import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import service from './service';
-const router = useRouter();
 
+const router = useRouter();
 const form = reactive({
-    UserAccount: 'admin',
-    PassWord: '123456',
+    userAccount: 'admin',
+    passWord: '123456',
 });
 
 const formIntance = ref();
+const btnLoading = ref(false);
 
 const rules = reactive({
-    UserAccount: [{ required: true, message: '请输入账号', trigger: 'blur' }],
-    PassWord: [
+    userAccount: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+    passWord: [
         { required: true, message: '请输入密码', trigger: 'blur' },
         { min: 6, message: '长度不能小于6位', trigger: 'change' },
         { max: 10, message: '长度不能大于10位', trigger: 'change' },
@@ -58,14 +65,19 @@ const rules = reactive({
  * 提交
  */
 const onSubmit = async () => {
-    await formIntance.value.validate((valid, fields) => {
-        service
-            .login(form)
-            .then(res => console.log('res'))
-            .catch(err => console.log('err', err));
-        // if (valid) {
-        //     router.push('/homepage');
-        // }
+    await formIntance.value.validate(valid => {
+        if (valid) {
+            btnLoading.value = true;
+            service
+                .login(form)
+                .then(() => {
+                    btnLoading.value = false;
+                    router.push('/homepage');
+                })
+                .catch(() => {
+                    btnLoading.value = false;
+                });
+        }
     });
 };
 </script>
