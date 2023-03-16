@@ -15,7 +15,6 @@ const service = axios.create({
 // request拦截器
 service.interceptors.request.use(
     config => {
-        console.log('request', config);
         return config;
     },
     error => {

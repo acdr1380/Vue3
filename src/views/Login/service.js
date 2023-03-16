@@ -3,7 +3,7 @@ import axios from '@/utils/request.js';
 function login(params) {
     return axios({
         method: 'post',
-        url: '/user/login',
+        url: '/system/user/login',
         data: params,
     });
 }
@@ -11,7 +11,7 @@ function login(params) {
 function logout(params) {
     return axios({
         method: 'get',
-        url: '/user',
+        url: '/system/user',
         data: params,
     });
 }

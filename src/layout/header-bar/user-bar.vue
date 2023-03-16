@@ -1,6 +1,6 @@
 <template>
     <el-dropdown trigger="click">
-        <el-button type="delfault" :icon="User" circle> </el-button>
+        <el-button :icon="User" circle> </el-button>
         <template #dropdown>
             <el-dropdown-menu>
                 <el-dropdown-item>查看个人信息</el-dropdown-item>

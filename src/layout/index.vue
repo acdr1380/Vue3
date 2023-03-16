@@ -28,6 +28,12 @@ import Menu from './menu/index.vue';
 .layout {
     height: 100%;
 
+    & > .el-container {
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
     .el-header {
         border-bottom: solid 1px var(--el-menu-border-color);
     }
