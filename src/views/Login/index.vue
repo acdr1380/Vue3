@@ -91,7 +91,7 @@ const onSubmit = async () => {
     align-items: center;
     justify-content: center;
 
-    background: url('/public/images/loginBackgroundImage.jpg') no-repeat center center fixed;
+    background: url('@/assets/images/loginBackgroundImage.jpg') no-repeat center center fixed;
     background-size: cover;
     .login-from {
         width: 400px;
