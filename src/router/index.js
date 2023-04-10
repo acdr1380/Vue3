@@ -16,24 +16,32 @@ const routes = [
                 name: 'homepage',
                 component: () => import('@/views/home-page/index.vue'),
             },
-
             {
-                path: '/system/user',
-                name: 'user',
-                component: () => import('@/views/modules/system/user-management/index.vue'),
+                name: 'system',
+                path: '/system',
+                children: [
+                    {
+                        path: 'user',
+                        component: () => import('@/views/modules/system/user-management/index.vue'),
+                    },
+                    {
+                        path: 'menu',
+                        component: () => import('@/views/modules/system/menu-management/index.vue'),
+                    },
+                ],
             },
             {
-                path: '/system/menu',
-                name: 'menu',
-                component: () => import('@/views/modules/system/menu-management/index.vue'),
+                name: 'threeJs',
+                path: '/threeJs',
+                component: () => import('@/views/modules/threeJs/index.vue'),
             },
-
             {
                 path: '/:pathMatch(.*)*',
                 component: () => import('@/views/error-page/index.vue'),
             },
         ],
     },
+
     {
         name: 'login',
         path: '/login',
