@@ -64,16 +64,17 @@ export default ({ mode }) => {
         },
         server: {
             strictPort: true,
-            port: 3001,
+            port: 2001,
             cors: true,
             proxy: {
                 [VITE_APP_SERVER]: {
-                    target: 'http://localhost:5001',
+                    target: 'http://localhost:2023',
                     changeOrigin: true,
                     logLevel: 'debug',
                     rewrite: path => path.replace(VITE_APP_SERVER, ''),
                 },
             },
+            hmr: true,
         },
     });
 };
