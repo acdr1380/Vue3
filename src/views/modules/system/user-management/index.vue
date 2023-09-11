@@ -18,7 +18,7 @@
 <script setup>
 import { ref, reactive, effect } from 'vue';
 import service from './service';
-import AddUser from './addUser.vue';
+import AddUser from './add-user.vue';
 
 let tableData = reactive([]);
 let loading = ref(false);

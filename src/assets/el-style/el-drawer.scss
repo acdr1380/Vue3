@@ -1,0 +1,12 @@
+/** 
+重写抽屉相关的样式
+*/
+
+.el-drawer {
+    --el-drawer-padding-primary: var(--el-dialog-padding-primary, 10px) !important;
+}
+
+.el-drawer__header {
+    margin-bottom: 10px !important;
+    border-bottom: 1px solid var(--el-border-color);
+}
