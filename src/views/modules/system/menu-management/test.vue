@@ -1,36 +1,31 @@
 <template>
-    <el-input type="text" v-model="value" @input="input" />
+    <div><el-input type="text" v-model="str" @chaneg="change" /></div>
 </template>
 
 <script setup>
-import { ref, watch, reactive } from 'vue';
-const props = defineProps({
-    modeValue: {
-        type: String,
-        default: '',
-    },
-});
+import { ref, watch, defineProps, defineEmits, toRaw } from 'vue';
 
-// const { modeValue, title } = reactive(props);
+// props
+const props = defineProps(['modelValue', 'message']);
+
+// emit
 const emit = defineEmits(['update:modeValue', 'input']);
 
-const value = ref(props.title);
+const str = ref(props.message);
 
-watch(value, (newValue, preValue) => {
-    emit('update:modeValue', newValue);
-});
-
-// 使用函数返回值监听props消除警告
 watch(
-    () => props.modeValue,
-    (newValue, preValue) => {
-        value.value = newValue;
+    () => props.modelValue,
+    () => {
+        console.log(toRaw(props));
     }
 );
 
-const input = value => {
-    emit('input', value);
-};
+/**
+ * 值改变事件
+ */
+function change(v) {
+    emit('update:modeValue', v);
+}
 </script>
 
 <style lang="scss" scope></style>

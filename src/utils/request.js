@@ -7,8 +7,8 @@ import.meta.env = {
     PROD: false,
     SSR: false,
 };
-import axios from '/node_modules/.vite/deps/axios.js?v=3791ec66';
-import { ElMessage } from '/node_modules/.vite/deps/element-plus.js?v=3791ec66';
+import axios from 'axios';
+import { ElMessage } from 'element-plus';
 
 const { VITE_APP_SERVER } = import.meta.env;
 

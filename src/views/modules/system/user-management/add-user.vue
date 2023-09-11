@@ -3,7 +3,7 @@
 
     <el-drawer v-model="visible" title="新增用户">
         <div class="layout">
-            <div class="content">
+            <div class="container">
                 <el-form :model="form" ref="formInstance" :rules="rules">
                     <el-form-item label="用户名称">
                         <el-input v-model="form.UserName"></el-input>
