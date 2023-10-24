@@ -2,7 +2,13 @@
     <div class="login-wrap">
         <div class="login-from">
             <div class="title">Vue3学习</div>
-            <el-form ref="formIntance" :model="form" :rules="rules" size="default" @submit.prevent>
+            <el-form
+                ref="formIntance"
+                :model="form"
+                :rules="rules"
+                size="default"
+                @keydown.native.enter="onSubmit"
+            >
                 <el-form-item prop="userAccount">
                     <el-input v-model="form.userAccount" placeholder="请输入账号">
                         <template #prefix>
@@ -39,7 +45,7 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue';
+import { reactive, ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import service from './service';
 
@@ -56,29 +62,35 @@ const rules = reactive({
     userAccount: [{ required: true, message: '请输入账号', trigger: 'blur' }],
     passWord: [
         { required: true, message: '请输入密码', trigger: 'blur' },
-        { min: 6, message: '长度不能小于6位', trigger: 'change' },
-        { max: 10, message: '长度不能大于10位', trigger: 'change' },
+        { min: 6, max: 10, message: '长度不能小于6位大于10位', trigger: 'change' },
     ],
+});
+
+// 初始化
+onMounted(() => {
+    window.addEventListener('keydown', onSubmit);
+});
+
+// 清理绑定事件
+onUnmounted(() => {
+    window.removeEventListener('keydown', onSubmit);
 });
 
 /**
  * 提交
  */
 const onSubmit = async () => {
-    await formIntance.value.validate(valid => {
-        if (valid) {
-            btnLoading.value = true;
-            service
-                .login(form)
-                .then(() => {
-                    btnLoading.value = false;
-                    router.push('/homepage');
-                })
-                .catch(() => {
-                    btnLoading.value = false;
-                });
+    const vaild = await formIntance.value.validate().catch(e => console.log(e));
+    if (vaild) {
+        btnLoading.value = true;
+        const { success } = await service.login(form).catch(() => {
+            btnLoading.value = false;
+        });
+        if (success) {
+            router.push('/homepage');
         }
-    });
+        btnLoading.value = false;
+    }
 };
 </script>
 

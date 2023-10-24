@@ -31,7 +31,6 @@ import Menu from './menu/index.vue';
     & > .el-container {
         height: 100%;
         overflow-y: auto;
-        overflow-x: hidden;
     }
 
     .el-header {
