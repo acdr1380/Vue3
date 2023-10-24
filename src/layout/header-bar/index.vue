@@ -25,7 +25,7 @@ import UserBar from './user-bar.vue';
     align-items: center;
 
     .logo {
-        width: 25%;
+        width: 270px;
         height: 100%;
         img {
             object-fit: cover;
