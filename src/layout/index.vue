@@ -20,6 +20,7 @@
     </el-container>
 </template>
 <script setup>
+import { ElContainer, ElHeader, ElAside, ElMain } from 'element-plus';
 import HeaderBar from './header-bar/index.vue';
 import Menu from './menu/index.vue';
 </script>

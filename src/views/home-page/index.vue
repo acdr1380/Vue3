@@ -7,6 +7,7 @@
 import { useHomePageStore } from './store.js';
 import { useGlobalStore } from '@/stores/globalStore.js';
 import { ref, computed } from 'vue';
+import { ElButton } from 'element-plus';
 const store = useGlobalStore();
 const num = ref(0);
 

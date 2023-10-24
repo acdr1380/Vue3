@@ -12,6 +12,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
+import { ElDropdown, ElButton, ElDropdownMenu, ElDropdownItem } from 'element-plus';
 import { User } from '@element-plus/icons-vue';
 
 function loginOut() {

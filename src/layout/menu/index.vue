@@ -27,6 +27,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { ElScrollbar, ElMenu, ElMenuItem, ElSubMenu, ElIcon } from 'element-plus';
 import { Document, Menu as IconMenu, Location, Setting } from '@element-plus/icons-vue';
 </script>
 
