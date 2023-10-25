@@ -25,6 +25,7 @@
 
 <script setup>
 import { ref, reactive, toValue } from 'vue';
+import { ElForm, ElFormItem, ElInput, ElButton, ElDrawer } from 'element-plus';
 
 // 控制抽屉显示
 const visible = ref(false);
@@ -55,7 +56,7 @@ const rules = reactive({
     PassWord: [
         { required: true, message: '用户密码必填', trigger: 'blur' },
         {
-            validator: (rule, value, callbac) => {
+            validator: (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('密码不能为空'));
                 } else {

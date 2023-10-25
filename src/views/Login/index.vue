@@ -47,6 +47,8 @@
 <script setup>
 import { reactive, ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { ElForm, ElButton, ElInput, ElIcon, ElFormItem } from 'element-plus';
+import { UserFilled, Lock } from '@element-plus/icons-vue';
 import service from './service';
 
 const router = useRouter();
@@ -58,6 +60,7 @@ const form = reactive({
 const formIntance = ref();
 const btnLoading = ref(false);
 
+// 表单验证
 const rules = reactive({
     userAccount: [{ required: true, message: '请输入账号', trigger: 'blur' }],
     passWord: [
