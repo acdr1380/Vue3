@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import { createPinia } from 'pinia';
 import { piniaPlugin } from '@/plugins/piniaPlugin.js';
+import { ElLoadingDirective } from 'element-plus';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 // element的样式
 import 'element-plus/dist/index.css';

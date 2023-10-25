@@ -10,6 +10,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
+import { ElInput } from 'element-plus';
 import Test from './test.vue';
 
 const title = ref('123');

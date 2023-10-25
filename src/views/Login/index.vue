@@ -70,14 +70,14 @@ const rules = reactive({
 });
 
 // 初始化
-onMounted(() => {
-    window.addEventListener('keydown', onSubmit);
-});
+// onMounted(() => {
+//     window.addEventListener('keydown', (e) =>  onSubmit());
+// });
 
-// 清理绑定事件
-onUnmounted(() => {
-    window.removeEventListener('keydown', onSubmit);
-});
+// // 清理绑定事件
+// onUnmounted(() => {
+//     window.removeEventListener('keydown', onSubmit);
+// });
 
 /**
  * 提交

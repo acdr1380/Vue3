@@ -37,7 +37,7 @@ service.interceptors.response.use(
     res => {
         const { Code = 200, Message, Data, Success } = res.data;
 
-        if (!Code || Code != 200) {
+        if (!Code || Code != 200 || !Success) {
             ElMessage.error(Message);
             return Promise.reject(new Error(Message));
         } else {

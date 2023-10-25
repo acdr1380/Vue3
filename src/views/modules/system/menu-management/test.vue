@@ -1,9 +1,10 @@
 <template>
-    <div><el-input type="text" v-model="str" @chaneg="change" /></div>
+    <div><el-input type="text" v-model="str" @input="input" /></div>
 </template>
 
 <script setup>
-import { ref, watch, defineProps, defineEmits, toRaw } from 'vue';
+import { ref, watch, defineEmits, toRaw } from 'vue';
+import { ElInput } from 'element-plus';
 
 // props
 const props = defineProps(['modelValue', 'message']);
@@ -11,19 +12,17 @@ const props = defineProps(['modelValue', 'message']);
 // emit
 const emit = defineEmits(['update:modeValue', 'input']);
 
-const str = ref(props.message);
+const str = ref(props.modelValue);
 
 watch(
     () => props.modelValue,
-    () => {
-        console.log(toRaw(props));
-    }
+    () => (str.value = props.modelValue)
 );
 
 /**
  * 值改变事件
  */
-function change(v) {
+function input(v) {
     emit('update:modeValue', v);
 }
 </script>
