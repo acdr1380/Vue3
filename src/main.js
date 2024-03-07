@@ -3,9 +3,8 @@ import App from './App.vue';
 import router from './router';
 import { createPinia } from 'pinia';
 import { piniaPlugin } from '@/plugins/piniaPlugin.js';
-import { ElLoadingDirective } from 'element-plus';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
-// element的样式
+import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 // 全局自定义样式
 import '@/assets/global-style.scss';
@@ -18,5 +17,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component);
 }
 app.use(router)
+    .use(ElementPlus)
     .use(createPinia().use(piniaPlugin(['globalStore'])))
     .mount('#app');

@@ -3,7 +3,7 @@
         <div class="login-from">
             <div class="title">Vue3学习</div>
             <el-form
-                ref="formIntance"
+                ref="formInstance"
                 :model="form"
                 :rules="rules"
                 size="default"
@@ -28,7 +28,6 @@
                         </template>
                     </el-input>
                 </el-form-item>
-
                 <el-form-item style="margin-top: 10px">
                     <el-button
                         type="primary"
@@ -47,7 +46,6 @@
 <script setup>
 import { reactive, ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { ElForm, ElButton, ElInput, ElIcon, ElFormItem } from 'element-plus';
 import { UserFilled, Lock } from '@element-plus/icons-vue';
 import service from './service';
 
@@ -57,7 +55,7 @@ const form = reactive({
     passWord: '123456',
 });
 
-const formIntance = ref();
+const formInstance = ref();
 const btnLoading = ref(false);
 
 // 表单验证
@@ -70,28 +68,33 @@ const rules = reactive({
 });
 
 // 初始化
-// onMounted(() => {
-//     window.addEventListener('keydown', (e) =>  onSubmit());
-// });
+onMounted(() => {});
 
-// // 清理绑定事件
-// onUnmounted(() => {
-//     window.removeEventListener('keydown', onSubmit);
-// });
+// 卸载
+onUnmounted(() => {});
 
 /**
  * 提交
  */
 const onSubmit = async () => {
-    const vaild = await formIntance.value.validate().catch(e => console.log(e));
-    if (vaild) {
-        btnLoading.value = true;
-        const { success } = await service.login(form).catch(() => {
-            btnLoading.value = false;
-        });
-        if (success) {
-            router.push('/homepage');
+    try {
+        const valid = await formInstance.value.validate();
+        if (valid) {
+            // 设置按钮加载状态
+            btnLoading.value = true;
+            const loginResponse = await service.login(form);
+            // 校验登录响应
+            if (loginResponse?.success) {
+                // 登录成功，跳转到首页
+                router.push('/homepage');
+            } else {
+                console.log('登录失败');
+            }
         }
+    } catch (err) {
+        console.error('发生错误：', err);
+    } finally {
+        // 无论成功或失败，重置按钮加载状态
         btnLoading.value = false;
     }
 };

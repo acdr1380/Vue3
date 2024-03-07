@@ -2,7 +2,7 @@
     <div class="layout">
         <div class="header">
             <div class="right">
-                <AddUser></AddUser>
+                <AddUser title="123"></AddUser>
             </div>
         </div>
         <div class="container">
@@ -17,7 +17,6 @@
 
 <script setup>
 import { ref, reactive, effect } from 'vue';
-import { ElTable, ElTableColumn, ElLoading } from 'element-plus';
 import service from './service';
 import AddUser from './add-user.vue';
 

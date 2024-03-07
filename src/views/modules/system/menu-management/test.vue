@@ -4,7 +4,6 @@
 
 <script setup>
 import { ref, watch, defineEmits, toRaw } from 'vue';
-import { ElInput } from 'element-plus';
 
 // props
 const props = defineProps(['modelValue', 'message']);
