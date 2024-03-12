@@ -41,6 +41,9 @@ service.interceptors.response.use(
             ElMessage.error(Message);
             return Promise.reject(new Error(Message));
         } else {
+            // 请求成功，处理消息
+            if (Message) ElMessage.success(Message);
+
             return {
                 code: Code,
                 message: Message,
@@ -58,6 +61,9 @@ service.interceptors.response.use(
         } = error;
 
         switch (status) {
+            case 400:
+                message = '参数错误';
+                break;
             case 401:
                 message = '用户未登录';
                 break;

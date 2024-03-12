@@ -16,7 +16,11 @@ const app = createApp(App);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component);
 }
+const elementConfig = {
+    size: 'small', // 配置全局组件大小 可以设置为 'large', 'medium' 或者 'small'
+};
+
 app.use(router)
-    .use(ElementPlus)
+    .use(ElementPlus, elementConfig)
     .use(createPinia().use(piniaPlugin(['globalStore'])))
     .mount('#app');

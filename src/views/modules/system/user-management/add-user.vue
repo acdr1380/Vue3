@@ -1,7 +1,5 @@
 <template>
-    <el-button type="primary" @click="() => (visible = true)">新增用户</el-button>
-
-    <el-drawer v-model="visible" title="新增用户">
+    <el-drawer v-model="visible" :title="title">
         <div class="layout">
             <div class="container">
                 <el-form :model="form" ref="formInstance" :rules="rules">
@@ -17,24 +15,27 @@
                 </el-form>
             </div>
             <div class="footer">
-                <el-button type="primary" size="default" :loading="loading" @click="submit"
-                    >提交</el-button
-                >
+                <el-button type="primary" :loading="loading" @click="submit"> 提交 </el-button>
             </div>
         </div>
     </el-drawer>
 </template>
 
 <script setup>
-import { ref, reactive, toValue } from 'vue';
-import moment from 'moment';
+import { ref, reactive, toRefs } from 'vue';
+import service from './service';
+
 // 获取props
 const props = defineProps({
     title: String,
+    visible: Boolean,
 });
+const { title, visible } = toRefs(props);
+
+const emit = defineEmits(['handleOk']);
+
 const PASSWORD_REQUIREMENTS_REGEX = /^(?=.*[\W_])[A-Za-z0-9\S]{6,}$/; // 正则表达式要求密码至少包含一个非字母数字字符（如：特殊字符或下划线）
-// 控制抽屉显示
-const visible = ref(false);
+
 //  表单实例
 const formInstance = ref();
 // loading
@@ -79,16 +80,14 @@ const rules = reactive({
  * 提交
  */
 async function submit() {
-    try {
-        const validate = await formInstance.value.validate();
-        if (validate) {
-            loading.value = true;
-            console.log(validate, { ...toValue(form) });
-        }
-    } catch (error) {
-        console.error(error);
-    } finally {
+    const validate = await formInstance.value.validate();
+    if (validate) {
+        loading.value = true;
+        const { data } = await service.AddUser(form).catch(err => (loading.value = false));
         loading.value = false;
+        visible.value = false;
+
+        emit('handleOk', data);
     }
 }
 </script>

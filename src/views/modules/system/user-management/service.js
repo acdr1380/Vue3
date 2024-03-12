@@ -1,30 +1,34 @@
 import axios from '@/utils/request.js';
 
-/**
- * 获取所有用户
- * @returns
- */
-function GetUserList() {
-    return axios({
-        method: 'get',
-        url: '/system/user',
-        data: { dd: 4 },
-    });
-}
-
-/**
- * 获取所有用户
- * @returns
- */
-function AddUser(params) {
-    return axios({
-        method: 'post',
-        url: '/system/user',
-        data: params,
-    });
-}
-
 export default {
-    GetUserList,
-    AddUser,
+    /**
+     * 获取用户列表
+     */
+    GetUserList: () => {
+        return axios({
+            method: 'get',
+            url: '/system/user',
+        });
+    },
+
+    /**
+     * 添加用户
+     */
+    AddUser: params => {
+        return axios({
+            method: 'post',
+            url: '/system/user',
+            data: params,
+        });
+    },
+
+    /**
+     * 删除用户
+     */
+    DeleteUser: params => {
+        return axios({
+            method: 'delete',
+            url: `/system/user/${params}`,
+        });
+    },
 };
